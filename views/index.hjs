@@ -4,8 +4,22 @@
     <title>{{ title }}</title>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
-  <body>
-    <h1>{{ title }}</h1>
-    <p>Welcome to {{ title }}</p>
+  <body style="padding:24px">
+    <h1>Create a profile</h1>
+    <form method="POST" action="/api/profile">
+    	<input type="text" name="firstName" placeholder="First Name" /><br />
+    	<input type="text" name="lastName" placeholder="Last Name" /><br />
+    	<input type="text" name="email" placeholder="Email" /><br />
+    	<input type="text" name="password" placeholder="Password" /><br />
+    	<input type="submit" value="Submit">
+    </form>
+    <h1>Create a bookmark</h1>
+    <form method="POST" action="/api/bookmark">
+      <input type="text" name="profile" placeholder="Profile" /><br />
+      <input type="text" name="url" placeholder="Url" /><br />
+      <input type="text" name="title" placeholder="Title" /><br />
+      <input type="text" name="description" placeholder="Description" /><br />
+      <input type="submit" value="Submit">
+    </form>
   </body>
 </html>
