@@ -12,7 +12,7 @@ router.get('/:resource', function(req, res, next) {
 	  	resource: 'Invalid API request'
 	  })
 	}
-	controller.find(req.query)
+	controller.find(req.query, false)
 		.then(function(entities) {
 		  res.json({
 		  	confirmation: 'Success',

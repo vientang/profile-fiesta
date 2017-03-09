@@ -13,6 +13,12 @@
     	<input type="text" name="password" placeholder="Password" /><br />
     	<input type="submit" value="Submit">
     </form>
+    <h1>Log In</h1>
+    <form method="POST" action="/account/login">
+      <input type="text" name="email" placeholder="Email" /><br />
+      <input type="text" name="password" placeholder="Password" /><br />
+      <input type="submit" value="Submit">
+    </form>
     <!-- find a way to handle bad urls -->
     <h1>Create a bookmark</h1>
     <form method="POST" action="/api/bookmark">
