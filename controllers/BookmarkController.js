@@ -11,7 +11,10 @@ module.exports = {
 					reject(err)
 					return
 				}
-				resolve(bookmarks)
+				var summaries = bookmarks.map(function(bookmark) {
+					return bookmark.summary()
+				})
+				resolve(summaries)
 			})
 		})
 	},
@@ -22,7 +25,7 @@ module.exports = {
 					reject(err)
 					return
 				}
-				resolve(bookmark)
+				resolve(bookmark.summary())
 			})
 		})
 	},
@@ -49,7 +52,7 @@ module.exports = {
 						reject(err)
 						return
 					}
-				resolve(bookmark)
+				resolve(bookmark.summary())
 				})
 			})
 

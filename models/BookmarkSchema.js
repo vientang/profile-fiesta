@@ -5,7 +5,20 @@ var BookmarkSchema = new mongoose.Schema({
 	url: {type: String, trim: true, default: ''},
 	title: {type: String, trim: true, default: ''},
 	description: {type: String, trim: true, default: ''},
-	image: {type: Date, default: Date.now()},
+	image: {type: String, default: ''},
+	timestamp: {type: Date, default: Date.now()}
 })
+
+BookmarkSchema.methods.summary = function() {
+	var summary = {
+		id: this._id.toString(),
+		url: this.url,
+		title: this.title,
+		description: this.description,
+		image: this.image,
+		timestamp: this.timestamp
+	}
+	return summary
+}
 
 module.exports = mongoose.model('BookmarkSchema', BookmarkSchema);
