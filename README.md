@@ -1,5 +1,5 @@
 # profile-fiesta
-Create a profile and save your favorite links.
+Create a social profile and save your favorite links where others can what you've bookmarked.
 
 ##What I'm working with
 1. React

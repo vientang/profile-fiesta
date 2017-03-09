@@ -71,7 +71,7 @@ router.post('/:resource', function(req, res, next) {
 		.catch(function(err) {
 			res.json({
 		  	confirmation: 'Failed',
-		  	resource: resource+' of '+id+' not not created'
+		  	resource: resource + ' not not created'
 		  })
 		})
 })
