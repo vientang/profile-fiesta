@@ -3,9 +3,14 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www"
+    "start": "nodemon ./bin/www",
+    "build": "webpack -w"
   },
   "dependencies": {
+    "babel-core": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-react": "^6.23.0",
     "bcryptjs": "^2.4.3",
     "bluebird": "^3.5.0",
     "body-parser": "~1.16.0",
@@ -19,7 +24,10 @@
     "jsonwebtoken": "^7.3.0",
     "mongoose": "^4.8.6",
     "morgan": "~1.7.0",
+    "react": "^15.4.2",
+    "react-dom": "^15.4.2",
     "serve-favicon": "~2.3.2",
-    "superagent": "^3.5.0"
+    "superagent": "^3.5.0",
+    "webpack": "^1.14.0"
   }
 }

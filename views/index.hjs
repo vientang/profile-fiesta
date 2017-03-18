@@ -1,29 +1,18 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>{{ title }}</title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
+    <meta content="IE=edge" http-equiv="x-ua-compatible"/>
+    <meta content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no" name="viewport"/>
+    <meta content="yes" name="apple-mobile-web-app-capable"/>
+    <meta content="yes" name="apple-touch-fullscreen"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- <link rel='stylesheet' href='/styles/style.css' /> -->
   </head>
-  <body style="padding:24px">
-    <h1>Create a profile</h1>
-    <form method="POST" action="/api/profile">
-    	<input type="text" name="firstName" placeholder="First Name" /><br />
-    	<input type="text" name="lastName" placeholder="Last Name" /><br />
-    	<input type="text" name="email" placeholder="Email" /><br />
-    	<input type="text" name="password" placeholder="Password" /><br />
-    	<input type="submit" value="Submit">
-    </form>
-    <h1>Log In</h1>
-    <form method="POST" action="/account/login">
-      <input type="text" name="email" placeholder="Email" /><br />
-      <input type="text" name="password" placeholder="Password" /><br />
-      <input type="submit" value="Submit">
-    </form>
-    <!-- find a way to handle bad urls -->
-    <h1>Create a bookmark</h1>
-    <form method="POST" action="/api/bookmark">
-      <input type="text" name="url" placeholder="Url" /><br />
-      <input type="submit" value="Submit">
-    </form>
+  <body>
+    <div id="root"></div>
+    <script type="text/javascript" src="/build/bundle.js"></script>
   </body>
 </html>
