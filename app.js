@@ -12,7 +12,7 @@ mongoose.connect(process.env.DB_URL, function(err, res) {
 	if (err) {
 		console.log('DB connection failed', err);
 	} else {
-		console.log('DB connection success');
+		console.log('DB connection success, server listening on port 3000');
 	}
 });
 
