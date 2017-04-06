@@ -6,5 +6,11 @@ export default {
       type: actionTypes.PROFILES_RECEIVED,
       profiles
     }
+  },
+  profileCreated: (profile) => {
+    return {
+      type: actionTypes.PROFILE_CREATED,
+      profile
+    }
   }
 }

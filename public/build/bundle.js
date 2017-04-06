@@ -6838,7 +6838,8 @@
 	  value: true
 	});
 	exports.default = {
-	  PROFILES_RECEIVED: 'PROFILES_RECEIVED'
+	  PROFILES_RECEIVED: 'PROFILES_RECEIVED',
+	  PROFILE_CREATED: 'PROFILE_CREATED'
 	};
 
 /***/ },
@@ -10423,6 +10424,12 @@
 	      type: _constants2.default.PROFILES_RECEIVED,
 	      profiles: profiles
 	    };
+	  },
+	  profileCreated: function profileCreated(profile) {
+	    return {
+	      type: _constants2.default.PROFILE_CREATED,
+	      profile: profile
+	    };
 	  }
 	};
 
@@ -10546,7 +10553,13 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _reactRedux = __webpack_require__(86);
+	
 	var _utils = __webpack_require__(58);
+	
+	var _actions = __webpack_require__(96);
+	
+	var _actions2 = _interopRequireDefault(_actions);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -10589,12 +10602,15 @@
 	  }, {
 	    key: 'register',
 	    value: function register(event) {
+	      var _this2 = this;
+	
 	      event.preventDefault();
 	      _utils.APIManager.post('/api/profile', this.state.visitor, function (err, response) {
 	        if (err) {
 	          console.log(err);
 	        }
 	        console.log('Register: ', JSON.stringify(response));
+	        _this2.props.profileCreated(response.result);
 	      });
 	    }
 	  }, {
@@ -10627,7 +10643,19 @@
 	  return Signup;
 	}(_react.Component);
 	
-	exports.default = Signup;
+	Signup.propTypes = {
+	  profileCreated: _react.PropTypes.func
+	};
+	
+	var mapDispatchToProps = function mapDispatchToProps(dispatch) {
+	  return {
+	    profileCreated: function profileCreated(profile) {
+	      return dispatch(_actions2.default.profileCreated(profile));
+	    }
+	  };
+	};
+	
+	exports.default = (0, _reactRedux.connect)(null, mapDispatchToProps)(Signup);
 
 /***/ },
 /* 99 */
@@ -10780,6 +10808,12 @@
 	    case _constants2.default.PROFILES_RECEIVED:
 	      console.log('PROFILES_RECEIVED :', JSON.stringify(action.profiles));
 	      updatedState['list'] = action.profiles;
+	      return updatedState;
+	    case _constants2.default.PROFILE_CREATED:
+	      console.log('PROFILE_CREATED :', JSON.stringify(action.profile));
+	      var updatedList = Object.assign([], updatedState.list);
+	      updatedList.push(action.profile);
+	      updatedState['list'] = updatedList;
 	      return updatedState;
 	    default:
 	      return state;
