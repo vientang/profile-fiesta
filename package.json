@@ -3,8 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "nodemon ./bin/www",
-    "build": "webpack -w"
+    "build": "webpack -w",
+    "dev": "nodemon ./bin/www",
+    "lint": "eslint src/**/*.js routes controllers models webpack.config.js app.js",
+    "start": "concurrently 'npm run build' 'npm run dev'"
   },
   "dependencies": {
     "babel-core": "^6.24.0",
@@ -26,8 +28,23 @@
     "morgan": "~1.7.0",
     "react": "^15.4.2",
     "react-dom": "^15.4.2",
+    "react-redux": "^5.0.3",
+    "redux": "^3.6.0",
+    "redux-thunk": "^2.2.0",
     "serve-favicon": "~2.3.2",
     "superagent": "^3.5.0",
     "webpack": "^1.14.0"
+  },
+  "devDependencies": {
+    "concurrently": "^3.4.0",
+    "eslint": "^3.19.0",
+    "eslint-config-standard": "^10.2.0",
+    "eslint-config-standard-react": "^4.3.0",
+    "eslint-loader": "^1.7.1",
+    "eslint-plugin-import": "^2.2.0",
+    "eslint-plugin-node": "^4.2.2",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-react": "^6.10.3",
+    "eslint-plugin-standard": "^3.0.1"
   }
 }
