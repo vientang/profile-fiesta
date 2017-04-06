@@ -42,6 +42,29 @@ router.get('/:action', (req, res, next) => {
   }
 })
 
+/* POST to register. */
+router.post('/register', (req, res, next) => {
+  const credentials = req.body
+  controllers.profile
+    .create(credentials)
+    .then((profile) => {
+      // create a signed token
+      const token = utils.JWT.sign({id: profile.id}, process.env.TOKEN_SECRET)
+      req.session.token = token
+      res.json({
+        confirmation: 'Success',
+        profile: profile,
+        token: token
+      })
+    })
+    .catch((err) => {
+      res.json({
+        confirmation: 'Failed',
+        message: `Invalid credentials ${err}`
+      })
+    })
+})
+
 /* POST to login. */
 router.post('/login', (req, res, next) => {
   // check email and password

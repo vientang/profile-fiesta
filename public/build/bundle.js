@@ -10605,12 +10605,12 @@
 	      var _this2 = this;
 	
 	      event.preventDefault();
-	      _utils.APIManager.post('/api/profile', this.state.visitor, function (err, response) {
+	      _utils.APIManager.post('/account/register', this.state.visitor, function (err, response) {
 	        if (err) {
 	          console.log(err);
 	        }
-	        console.log('Register: ', JSON.stringify(response));
-	        _this2.props.profileCreated(response.result);
+	        // console.log('Register: ', JSON.stringify(response))
+	        _this2.props.profileCreated(response.profile);
 	      });
 	    }
 	  }, {
@@ -10806,11 +10806,11 @@
 	  var updatedState = Object.assign({}, state);
 	  switch (action.type) {
 	    case _constants2.default.PROFILES_RECEIVED:
-	      console.log('PROFILES_RECEIVED :', JSON.stringify(action.profiles));
+	      // console.log('PROFILES_RECEIVED :', JSON.stringify(action.profiles))
 	      updatedState['list'] = action.profiles;
 	      return updatedState;
 	    case _constants2.default.PROFILE_CREATED:
-	      console.log('PROFILE_CREATED :', JSON.stringify(action.profile));
+	      // console.log('PROFILE_CREATED :', JSON.stringify(action.profile))
 	      var updatedList = Object.assign([], updatedState.list);
 	      updatedList.push(action.profile);
 	      updatedState['list'] = updatedList;

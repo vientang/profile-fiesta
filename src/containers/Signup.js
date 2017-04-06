@@ -28,12 +28,12 @@ class Signup extends Component {
 
   register (event) {
     event.preventDefault()
-    APIManager.post('/api/profile', this.state.visitor, (err, response) => {
+    APIManager.post('/account/register', this.state.visitor, (err, response) => {
       if (err) {
         console.log(err)
       }
-      console.log('Register: ', JSON.stringify(response))
-      this.props.profileCreated(response.result)
+      // console.log('Register: ', JSON.stringify(response))
+      this.props.profileCreated(response.profile)
     })
   }
 
