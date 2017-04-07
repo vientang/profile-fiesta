@@ -69,7 +69,6 @@ router.post('/register', (req, res, next) => {
 router.post('/login', (req, res, next) => {
   // check email and password
   const credentials = req.body
-  console.log(credentials)
   controllers.profile
     .find({email: credentials.email}, true)
     .then(function (profiles) {

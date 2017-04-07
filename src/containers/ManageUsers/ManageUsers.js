@@ -12,13 +12,16 @@ class ManageUsers extends Component {
         firstName: '',
         lastName: '',
         email: '',
-        password: ''
+        password: '',
+        link: ''
       }
     }
     this.updatedVisitor = this.updatedVisitor.bind(this)
     this.register = this.register.bind(this)
     this.login = this.login.bind(this)
     this.logout = this.logout.bind(this)
+    this.updateLink = this.updateLink.bind(this)
+    this.submitLink = this.submitLink.bind(this)
   }
 
   componentDidMount () {
@@ -61,6 +64,27 @@ class ManageUsers extends Component {
     })
   }
 
+  updateLink (event) {
+    event.preventDefault()
+    this.setState({
+      link: event.target.value
+    })
+  }
+
+  submitLink (event) {
+    event.preventDefault()
+    const bookmark = {
+      profile: this.props.currentUser.id,
+      url: this.state.link
+    }
+    APIManager.post('/api/bookmark', bookmark, (err, response) => {
+      if (err) {
+        return new Error(err)
+      }
+      console.log('Submit Link:', JSON.stringify(response))
+    })
+  }
+
   updatedVisitor (event) {
     let updated = Object.assign({}, this.state.visitor)
     updated[event.target.id] = event.target.value
@@ -76,6 +100,8 @@ class ManageUsers extends Component {
           <div>
             <h2>Welcome {this.props.currentUser.firstName}</h2>
             <Logout onClick={this.logout} /> 
+            <input onChange={this.updateLink} type='text' placeholder='www.example.com' />
+            <button onClick={this.submitLink} type='submit'>Submit Link</button>
           </div> 
         : 
           <div>

@@ -45,10 +45,11 @@ module.exports = {
           return
         }
         let html = response.text
-        let props = ['og:title', 'og:description', 'og:image']
-        const metaData = Scraper.scrape(html, props, params.url)
+        let props = ['og:title', 'og:description', 'og:image', 'og:url']
+        const metaData = Scraper.scrape(html, props)
+        params = Object.assign(params, metaData)
 
-        Bookmark.create(metaData, (err, bookmark) => {
+        Bookmark.create(params, (err, bookmark) => {
           if (err) {
             reject(err)
             return

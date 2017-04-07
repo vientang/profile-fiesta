@@ -12,6 +12,7 @@ var BookmarkSchema = new mongoose.Schema({
 BookmarkSchema.methods.summary = function () {
   var summary = {
     id: this._id.toString(),
+    profile: this.profile,
     url: this.url,
     title: this.title,
     description: this.description,
