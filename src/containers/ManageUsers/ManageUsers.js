@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { APIManager } from '../../utils'
 import actions from '../../actions'
-import { Login, Logout, SignInForm } from '../../presentation'
+import { Login, Logout, SignInForm, BookmarkInput } from '../../presentation'
 
 class ManageUsers extends Component {
   constructor (props) {
@@ -81,7 +81,8 @@ class ManageUsers extends Component {
       if (err) {
         return new Error(err)
       }
-      console.log('Submit Link:', JSON.stringify(response))
+      const updatedBookmark = JSON.stringify(response.result)
+      this.props.saveBookmark(updatedBookmark)
     })
   }
 
@@ -100,8 +101,7 @@ class ManageUsers extends Component {
           <div>
             <h2>Welcome {this.props.currentUser.firstName}</h2>
             <Logout onClick={this.logout} /> 
-            <input onChange={this.updateLink} type='text' placeholder='www.example.com' />
-            <button onClick={this.submitLink} type='submit'>Submit Link</button>
+            <BookmarkInput onChange={this.updateLink} onClick={this.submitLink} />           
           </div> 
         : 
           <div>
@@ -131,7 +131,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     profileCreated: (profile) => dispatch(actions.profileCreated(profile)),
     currentUserReceived: (profile) => dispatch(actions.currentUserReceived(profile)),
-    currentUserLoggedout: (profile) => dispatch(actions.currentUserLoggedout(profile))
+    currentUserLoggedout: (profile) => dispatch(actions.currentUserLoggedout(profile)),
+    saveBookmark: (bookmark) => dispatch(actions.saveBookmark(bookmark))
   }
 }
 

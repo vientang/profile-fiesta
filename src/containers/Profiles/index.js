@@ -1,5 +1,3 @@
 import Profiles from './Profiles'
 
-export {
-  Profiles
-}
+export default Profiles

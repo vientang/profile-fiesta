@@ -13,6 +13,12 @@ export default {
       profile
     }
   },
+  profileSelected: (profile) => {
+    return {
+      type: actionTypes.PROFILE_SELECTED,
+      profile
+    }
+  },
   currentUserReceived: (profile) => {
     return {
       type: actionTypes.CURRENT_USER_RECEIVED,
@@ -23,6 +29,18 @@ export default {
     return {
       type: actionTypes.CURRENT_USER_LOGGEDOUT,
       profile
+    }
+  },
+  saveBookmark: (bookmark) => {
+    return {
+      type: actionTypes.SAVE_BOOKMARK,
+      bookmark
+    }
+  },
+  getBookmarks: (bookmarks) => {    
+    return {
+      type: actionTypes.GET_BOOKMARKS,
+      bookmarks
     }
   }
 }

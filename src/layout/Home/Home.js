@@ -1,15 +1,14 @@
 import React from 'react'
-import { Profiles, ManageUsers } from '../../containers'
+import { Profiles, ManageUsers, Bookmarks } from '../../containers'
 
 const Home = () => {
   return (
     <div className='row'>
-      <div className='col-md-3'>
-        <h1>Profiles</h1>
+      <div className='col-md-3'>        
         <Profiles />
       </div>
       <div className='col-md-6'>
-        <h1>Links</h1>
+        <Bookmarks />
       </div>
       <div className='col-md-3'>
         <ManageUsers />

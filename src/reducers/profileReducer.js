@@ -1,7 +1,8 @@
 import actionTypes from '../constants'
 
 let defaultState = {
-  list: []
+  list: [],
+  selectedProfile: null
 }
 
 export default (state = defaultState, action) => {
@@ -12,11 +13,13 @@ export default (state = defaultState, action) => {
       updatedState['list'] = action.profiles
       return updatedState
     case actionTypes.PROFILE_CREATED:
-      // console.log('PROFILE_CREATED :', JSON.stringify(action.profile))
       let updatedList = Object.assign([], updatedState.list)
       updatedList.push(action.profile)
       updatedState['list'] = updatedList
       return updatedState
+    case actionTypes.PROFILE_SELECTED:
+      updatedState['selectedProfile'] = action.profile
+      return updatedState  
     default:
       return state
   }

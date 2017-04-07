@@ -1,5 +1,3 @@
 import ManageUsers from './ManageUsers'
 
-export {
-  ManageUsers
-}
+export default ManageUsers
