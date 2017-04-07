@@ -10594,6 +10594,7 @@
 	    };
 	    _this.updatedVisitor = _this.updatedVisitor.bind(_this);
 	    _this.register = _this.register.bind(_this);
+	    _this.login = _this.login.bind(_this);
 	    return _this;
 	  }
 	
@@ -10633,6 +10634,21 @@
 	      });
 	    }
 	  }, {
+	    key: 'login',
+	    value: function login(event) {
+	      var _this4 = this;
+	
+	      event.preventDefault();
+	
+	      _utils.APIManager.post('/account/login', this.state.visitor, function (err, response) {
+	        if (err) {
+	          return new Error(err);
+	        }
+	        console.log("Response:", response);
+	        _this4.props.currentUserReceived(response.profile);
+	      });
+	    }
+	  }, {
 	    key: 'render',
 	    value: function render() {
 	      return _react2.default.createElement(
@@ -10644,20 +10660,39 @@
 	          'Welcome ',
 	          this.props.currentUser.firstName
 	        ) : _react2.default.createElement(
-	          'form',
+	          'div',
 	          null,
+	          _react2.default.createElement(
+	            'h2',
+	            null,
+	            'Sign In'
+	          ),
 	          _react2.default.createElement('input', { onChange: this.updatedVisitor, type: 'text', id: 'firstName', placeholder: 'First Name' }),
 	          _react2.default.createElement('br', null),
 	          _react2.default.createElement('input', { onChange: this.updatedVisitor, type: 'text', id: 'lastName', placeholder: 'Last Name' }),
 	          _react2.default.createElement('br', null),
-	          _react2.default.createElement('input', { onChange: this.updatedVisitor, type: 'text', id: 'email', placeholder: 'Email' }),
+	          _react2.default.createElement('input', { onChange: this.updatedVisitor, type: 'email', id: 'email', placeholder: 'Email' }),
 	          _react2.default.createElement('br', null),
-	          _react2.default.createElement('input', { onChange: this.updatedVisitor, type: 'text', id: 'password', placeholder: 'Password' }),
+	          _react2.default.createElement('input', { onChange: this.updatedVisitor, type: 'password', id: 'password', placeholder: 'Password' }),
 	          _react2.default.createElement('br', null),
 	          _react2.default.createElement(
 	            'button',
 	            { onClick: this.register },
 	            'Join'
+	          ),
+	          _react2.default.createElement(
+	            'h2',
+	            null,
+	            'Log In'
+	          ),
+	          _react2.default.createElement('input', { onChange: this.updatedVisitor, type: 'email', id: 'email', placeholder: 'Email' }),
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement('input', { onChange: this.updatedVisitor, type: 'password', id: 'password', placeholder: 'Password' }),
+	          _react2.default.createElement('br', null),
+	          _react2.default.createElement(
+	            'button',
+	            { onClick: this.login },
+	            'Log In'
 	          )
 	        )
 	      );
@@ -10778,11 +10813,6 @@
 	        _react2.default.createElement(
 	          'div',
 	          { className: 'col-md-3' },
-	          _react2.default.createElement(
-	            'h1',
-	            null,
-	            'Sign up'
-	          ),
 	          _react2.default.createElement(_containers.Signup, null)
 	        )
 	      );
@@ -10957,6 +10987,10 @@
 	        callback(err, null);
 	        return;
 	      }
+	      var confirmation = response.body.confirmation;
+	      if (confirmation !== 'Success') {
+	        callback({ message: response.body.message }, null);
+	      }
 	      callback(null, response.body);
 	    });
 	  },
@@ -10965,6 +10999,10 @@
 	      if (err) {
 	        callback(err, null);
 	        return;
+	      }
+	      var confirmation = response.body.confirmation;
+	      if (confirmation !== 'Success') {
+	        callback({ message: response.body.message }, null);
 	      }
 	      callback(null, response.body);
 	    });

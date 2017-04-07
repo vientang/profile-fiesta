@@ -12,8 +12,7 @@ class Home extends Component {
         <div className='col-md-6'>
           <h1>Links</h1>
         </div>
-        <div className='col-md-3'>
-          <h1>Sign up</h1>
+        <div className='col-md-3'>          
           <Signup />
         </div>
 

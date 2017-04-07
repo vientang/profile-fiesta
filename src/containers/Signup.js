@@ -16,6 +16,7 @@ class Signup extends Component {
     }
     this.updatedVisitor = this.updatedVisitor.bind(this)
     this.register = this.register.bind(this)
+    this.login = this.login.bind(this)
   }
 
   componentDidMount () {
@@ -46,17 +47,36 @@ class Signup extends Component {
     })
   }
 
+  login (event) {
+    event.preventDefault()
+
+    APIManager.post('/account/login', this.state.visitor, (err, response) => {
+      if (err) {
+        return new Error(err)
+      }
+      console.log("Response:", response)
+      this.props.currentUserReceived(response.profile)
+    })
+  }
+
   render () {
     return (
       <div>
         {(this.props.currentUser !== null) ? <h2>Welcome {this.props.currentUser.firstName}</h2> : 
-          <form>
+          
+          <div>
+            <h2>Sign In</h2>
             <input onChange={this.updatedVisitor} type='text' id='firstName' placeholder='First Name' /><br />
             <input onChange={this.updatedVisitor} type='text' id='lastName' placeholder='Last Name' /><br />
-            <input onChange={this.updatedVisitor} type='text' id='email' placeholder='Email' /><br />
-            <input onChange={this.updatedVisitor} type='text' id='password' placeholder='Password' /><br />
+            <input onChange={this.updatedVisitor} type='email' id='email' placeholder='Email' /><br />
+            <input onChange={this.updatedVisitor} type='password' id='password' placeholder='Password' /><br />
             <button onClick={this.register}>Join</button>
-          </form>
+
+            <h2>Log In</h2>
+            <input onChange={this.updatedVisitor} type='email' id='email' placeholder='Email' /><br />
+            <input onChange={this.updatedVisitor} type='password' id='password' placeholder='Password' /><br />
+            <button onClick={this.login}>Log In</button>
+          </div>
         }
       </div>      
     )
