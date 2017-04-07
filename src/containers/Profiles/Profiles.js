@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
-import { APIManager } from '../utils'
 import { connect } from 'react-redux'
-import actions from '../actions'
+import { APIManager } from '../../utils'
+import actions from '../../actions'
 
 class Profiles extends Component {
   componentDidMount () {

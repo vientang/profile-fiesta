@@ -18,5 +18,11 @@ export default {
       type: actionTypes.CURRENT_USER_RECEIVED,
       profile
     }
+  },
+  currentUserLoggedout: (profile) => {
+    return {
+      type: actionTypes.CURRENT_USER_LOGGEDOUT,
+      profile
+    }
   }
 }

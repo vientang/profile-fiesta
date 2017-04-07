@@ -1,7 +1,7 @@
-import Profiles from './Profiles'
-import Signup from './Signup'
+import { Profiles } from './Profiles'
+import { ManageUsers } from './ManageUsers'
 
 export {
-	Profiles,
-	Signup
+  Profiles,
+  ManageUsers
 }

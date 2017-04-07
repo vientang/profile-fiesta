@@ -13,6 +13,9 @@ export default (state = defaultState, action) => {
     case actionTypes.CURRENT_USER_RECEIVED:
       updatedState['currentUser'] = action.profile
       return updatedState
+    case actionTypes.CURRENT_USER_LOGGEDOUT:
+      updatedState['currentUser'] = action.profile
+      return updatedState
     default:
       return state
   }
