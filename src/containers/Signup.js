@@ -18,6 +18,16 @@ class Signup extends Component {
     this.register = this.register.bind(this)
   }
 
+  componentDidMount () {
+    // check the current user
+    APIManager.get('/account/currentuser', null, (err, response) => {
+      if (err) {
+        return new Error(err)
+      }
+      return response.profile ? this.props.currentUserReceived(response.profile) : null
+    })
+  }
+
   updatedVisitor (event) {
   	let updated = Object.assign({}, this.state.visitor)
     updated[event.target.id] = event.target.value
@@ -30,9 +40,8 @@ class Signup extends Component {
     event.preventDefault()
     APIManager.post('/account/register', this.state.visitor, (err, response) => {
       if (err) {
-        console.log(err)
+        return new Error(err)
       }
-      // console.log('Register: ', JSON.stringify(response))
       this.props.profileCreated(response.profile)
     })
   }
@@ -40,26 +49,36 @@ class Signup extends Component {
   render () {
     return (
       <div>
-        <form>
-          <input onChange={this.updatedVisitor} type='text' id='firstName' placeholder='First Name' /><br />
-          <input onChange={this.updatedVisitor} type='text' id='lastName' placeholder='Last Name' /><br />
-          <input onChange={this.updatedVisitor} type='text' id='email' placeholder='Email' /><br />
-          <input onChange={this.updatedVisitor} type='text' id='password' placeholder='Password' /><br />
-          <button onClick={this.register}>Join</button>
-        </form>
-      </div>
+        {(this.props.currentUser !== null) ? <h2>Welcome {this.props.currentUser.firstName}</h2> : 
+          <form>
+            <input onChange={this.updatedVisitor} type='text' id='firstName' placeholder='First Name' /><br />
+            <input onChange={this.updatedVisitor} type='text' id='lastName' placeholder='Last Name' /><br />
+            <input onChange={this.updatedVisitor} type='text' id='email' placeholder='Email' /><br />
+            <input onChange={this.updatedVisitor} type='text' id='password' placeholder='Password' /><br />
+            <button onClick={this.register}>Join</button>
+          </form>
+        }
+      </div>      
     )
   }
 }
 
 Signup.propTypes = {
-  profileCreated: PropTypes.func
+  profileCreated: PropTypes.func,
+  currentUser: PropTypes.object
+}
+
+const mapStateToProps = (state) => {
+  return {
+    currentUser: state.account.currentUser
+  }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    profileCreated: (profile) => dispatch(actions.profileCreated(profile))
+    profileCreated: (profile) => dispatch(actions.profileCreated(profile)),
+    currentUserReceived: (profile) => dispatch(actions.currentUserReceived(profile))
   }
 }
 
-export default connect(null, mapDispatchToProps)(Signup)
+export default connect(mapStateToProps, mapDispatchToProps)(Signup)
