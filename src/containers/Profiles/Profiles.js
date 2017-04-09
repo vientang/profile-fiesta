@@ -12,36 +12,29 @@ class Profiles extends Component {
   componentDidMount () {
     APIManager.get('/api/profile', null, (err, response) => {
       if (err) {
-        console.log(err)
+        return new Error(err)
       }
       const results = response.results
       this.props.profilesReceived(results)
     })
   }
 
-  selectProfile (event) {
+  selectProfile (profile, event) {
     event.preventDefault()
-    const selectedId = event.target.dataset.id
-    let selectedProfile;
-    this.props.profiles.forEach(profile => {
-      if (profile.id === selectedId) {
-        selectedProfile = profile
-        return
-      }
-    })
-    this.props.profileSelected(selectedProfile)
+    this.props.profileSelected(profile)
   }
 
   render () {
     const list = this.props.profiles.map((profile, i) => {
-      return (
-        <li
-          key={profile.id}
-          data-id={profile.id} 
-          onClick={this.selectProfile}>
-          { profile.firstName }
-        </li>
-      )
+      let name = null
+      if (this.props.selectedProfile === null) {
+        name = <a href='#' onClick={(event) => this.selectProfile(profile, event)}><span>{ profile.firstName }</span></a>
+      } else if (this.props.selectedProfile.id === profile.id) {
+        name = <a href='#' onClick={(event) => this.selectProfile(profile, event)}><strong style={{color: 'red'}}>{profile.firstName}</strong></a>
+      } else {
+        name = <a href='#' onClick={(event) => this.selectProfile(profile, event)}><span>{ profile.firstName }</span></a>
+      }
+      return <li key={profile.id}>{ name }</li>
     })
     return (
       <div>
@@ -61,7 +54,8 @@ Profiles.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    profiles: state.profile.list
+    profiles: state.profile.list,
+    selectedProfile: state.profile.selectedProfile
   }
 }
 
