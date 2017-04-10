@@ -1,0 +1,10 @@
+@mixin box-shadow {
+  -webkit-box-shadow: 0px 10px 5px -9px rgba(163,163,163,0.6);
+  -moz-box-shadow: 0px 10px 5px -9px rgba(163,163,163,0.6);
+  box-shadow: 0px 10px 5px -9px rgba(163,163,163,0.6);
+}
+
+@mixin flex-col {
+  display: flex;
+  flex-direction: column;
+}

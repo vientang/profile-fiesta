@@ -3,10 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+    "build-css": "./bin/build-css",
+    "watch-css": "./bin/watch-css",
     "build": "webpack -w",
     "dev": "nodemon ./bin/www",
     "lint": "eslint src/**/*.js routes controllers models webpack.config.js app.js",
-    "start": "concurrently 'npm run build' 'npm run dev'"
+    "start": "concurrently 'npm run watch-css' 'npm run build' 'npm run dev'"
   },
   "dependencies": {
     "babel-core": "^6.24.0",
@@ -33,10 +35,11 @@
     "redux-thunk": "^2.2.0",
     "serve-favicon": "~2.3.2",
     "superagent": "^3.5.0",
-    "webpack": "^1.14.0"
+    "webpack": "^2.3.3"
   },
   "devDependencies": {
     "concurrently": "^3.4.0",
+    "css-loader": "^0.28.0",
     "eslint": "^3.19.0",
     "eslint-config-standard": "^10.2.0",
     "eslint-config-standard-react": "^4.3.0",
@@ -45,6 +48,9 @@
     "eslint-plugin-node": "^4.2.2",
     "eslint-plugin-promise": "^3.5.0",
     "eslint-plugin-react": "^6.10.3",
-    "eslint-plugin-standard": "^3.0.1"
+    "eslint-plugin-standard": "^3.0.1",
+    "node-sass": "^4.5.2",
+    "sass-loader": "^6.0.3",
+    "style-loader": "^0.16.1"
   }
 }

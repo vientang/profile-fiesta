@@ -1,2 +1,8 @@
+# Node Modules
 /node_modules
+
+# Public directories and files
+public
+
+npm-debug.log
 .env
