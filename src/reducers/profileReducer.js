@@ -15,14 +15,17 @@ export default (state = defaultState, action) => {
         updatedState['selectedProfile'] = action.profiles[0]
       }
       return updatedState
+
     case actionTypes.PROFILE_CREATED:
       let updatedList = Object.assign([], updatedState.list)
       updatedList.push(action.profile)
       updatedState['list'] = updatedList
       return updatedState
+
     case actionTypes.PROFILE_SELECTED:
       updatedState['selectedProfile'] = action.profile
       return updatedState
+      
     default:
       return state
   }

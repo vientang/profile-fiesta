@@ -37,10 +37,11 @@ export default {
       bookmark
     }
   },
-  getBookmarks: (bookmarks) => {    
+  getBookmarks: (bookmarks, params) => {    
     return {
       type: actionTypes.GET_BOOKMARKS,
-      bookmarks
+      bookmarks,
+      params
     }
   }
 }

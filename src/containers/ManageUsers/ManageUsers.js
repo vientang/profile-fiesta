@@ -67,22 +67,29 @@ class ManageUsers extends Component {
   updateLink (event) {
     event.preventDefault()
     this.setState({
-      link: event.target.value
+      visitor: {
+        link: event.target.value
+      }
     })
   }
 
   submitLink (event) {
     event.preventDefault()
+    // console.log("Current User", this.props.currentUser)
     const bookmark = {
       profile: this.props.currentUser.id,
-      url: this.state.link
+      url: this.state.visitor.link
     }
     APIManager.post('/api/bookmark', bookmark, (err, response) => {
       if (err) {
         return new Error(err)
       }
-      const updatedBookmark = JSON.stringify(response.result)
-      this.props.saveBookmark(updatedBookmark)
+      this.setState({
+        visitor: {
+          link: ''
+        }
+      })
+      this.props.saveBookmark(response.result)
     })
   }
 
@@ -101,11 +108,11 @@ class ManageUsers extends Component {
           <div>
             <h2>Welcome {this.props.currentUser.firstName}</h2>
             <Logout onClick={this.logout} /> 
-            <BookmarkInput onChange={this.updateLink} onClick={this.submitLink} />           
+            <BookmarkInput updateLink={this.updateLink} submitLink={this.submitLink} link={this.state.visitor.link}/>           
           </div> 
         : 
           <div>
-            <SignInForm onChange={this.updatedVisitor} onClick={this.register}/>
+            <SignInForm onChange={this.updatedVisitor} onClick={this.register} />
             <Login onClick={this.login} onChange={this.updatedVisitor} />
           </div>
         }
