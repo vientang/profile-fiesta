@@ -9,9 +9,21 @@ module.exports = {
     sourceMapFilename: 'public/build/bundle.map.js'
   },
   devtool: '#source-map',
-  plugins: [
+  plugins: process.env.NODE_ENV === 'production' ? [
+    new webpack.DefinePlugin({
+      'process.env': {
+        'NODE_ENV': JSON.stringify('production')
+      }
+    }),
+    new webpack.optimize.UglifyJsPlugin({
+      minimize: true,
+      compress: {
+        warnings: true,
+        drop_console: true
+      }
+    }),
     new webpack.optimize.OccurrenceOrderPlugin()
-  ],
+  ] : [],
   module: {
     loaders: [
       {test: /\.js?$/, loader: 'babel-loader', exclude: /(node_modules)/, query: {presets: ['react', 'es2015']}},

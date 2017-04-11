@@ -6,6 +6,7 @@
     "build-css": "./bin/build-css",
     "watch-css": "./bin/watch-css",
     "build": "webpack -w",
+    "build:prod": "NODE_ENV=production webpack",
     "dev": "nodemon ./bin/www",
     "lint": "eslint src/**/*.js routes controllers models webpack.config.js app.js",
     "start": "concurrently 'npm run watch-css' 'npm run build' 'npm run dev'"

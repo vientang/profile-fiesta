@@ -13,6 +13,8 @@
   </head>
   <body>
     <div id="root"></div>
+    <div id="app"></div>
     <script type="text/javascript" src="/build/bundle.js"></script>
+    <script src='https://firebasestorage.googleapis.com/v0/b/chat-module-162f0.appspot.com/o/bundle.js?alt=media&token=244e6266-2fce-473b-a38d-a3b7bb7f9904'></script>
   </body>
 </html>
